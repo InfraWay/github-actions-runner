@@ -9,7 +9,7 @@ jobs:
 
     steps:
       - uses: actions/checkout@v3
-      - name: Build the Docker image
+      - name: Build the Docker images
         env:
           DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
           DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
@@ -17,10 +17,10 @@ jobs:
           echo ${DOCKER_PASSWORD} | docker login -u ${DOCKER_USERNAME} --password-stdin
           TAG="standard"
           DOCKERNAME="infraway/${{ github.event.repository.name }}:${TAG}"
-          docker build -t ${DOCKERNAME} .
+          docker build . -t ${DOCKERNAME}
           docker push ${DOCKERNAME}
           TAG="dind"
           DOCKERNAME="infraway/${{ github.event.repository.name }}:${TAG}"
-          docker build -t ${DOCKERNAME} -f Dockerfile.dind
+          docker build . -t ${DOCKERNAME} -f Dockerfile.dind
           docker push ${DOCKERNAME}
           docker logout
