@@ -1,6 +1,7 @@
 FROM summerwind/actions-runner-dind:latest
 
-RUN sudo apt update -y \
+RUN sudo apt remove cmdtest \ 
+  && sudo apt update -y \
   && sudo apt install yarn -y \
   && sudo rm -rf /var/lib/apt/lists/*
 
