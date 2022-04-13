@@ -21,6 +21,6 @@ jobs:
           docker push ${DOCKERNAME}
           TAG="dind"
           DOCKERNAME="infraway/${{ github.event.repository.name }}:${TAG}"
-          docker build -t ${DOCKERNAME} Dockerfile.dind
+          docker build -t ${DOCKERNAME} -f Dockerfile.dind
           docker push ${DOCKERNAME}
           docker logout
