@@ -1,0 +1,27 @@
+name: Docker Image CI
+
+on:
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: "Docker image tag"
+        required: true
+        default: "dind"
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+      - name: Build the Docker image
+        env:
+          DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+          DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+        run: |
+          TAG=${{ github.event.inputs.tag }}
+          echo ${DOCKER_PASSWORD} | docker login -u ${DOCKER_USERNAME} --password-stdin
+          DOCKERNAME="infraway/${{ github.event.repository.name }}:${TAG}"
+          docker build -t ${DOCKERNAME} .
+          docker push ${DOCKERNAME}
+          docker logout
