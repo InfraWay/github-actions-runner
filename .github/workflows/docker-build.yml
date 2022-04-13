@@ -2,11 +2,6 @@ name: Docker Image CI
 
 on:
   workflow_dispatch:
-    inputs:
-      tag:
-        description: "Docker image tag"
-        required: true
-        default: "dind"
 
 jobs:
   build:
@@ -19,9 +14,13 @@ jobs:
           DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
           DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
         run: |
-          TAG=${{ github.event.inputs.tag }}
           echo ${DOCKER_PASSWORD} | docker login -u ${DOCKER_USERNAME} --password-stdin
+          TAG="standard"
           DOCKERNAME="infraway/${{ github.event.repository.name }}:${TAG}"
           docker build -t ${DOCKERNAME} .
+          docker push ${DOCKERNAME}
+          TAG="dind"
+          DOCKERNAME="infraway/${{ github.event.repository.name }}:${TAG}"
+          docker build -t ${DOCKERNAME} Dockerfile.dind
           docker push ${DOCKERNAME}
           docker logout
