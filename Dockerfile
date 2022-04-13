@@ -1,6 +1,6 @@
 FROM summerwind/actions-runner:latest
 
-RUN sudo apt remove cmdtest \ 
+RUN sudo apt remove yarn \ 
   && sudo apt update -y \
   && sudo apt install yarn -y \
   && sudo rm -rf /var/lib/apt/lists/*
