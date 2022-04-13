@@ -1,4 +1,4 @@
-FROM summerwind/actions-runner:latest
+FROM summerwind/actions-runner-dind:latest
 
 RUN sudo apt update -y \
   && sudo apt install yarn -y \
