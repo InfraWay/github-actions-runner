@@ -1,9 +1,8 @@
 FROM summerwind/actions-runner-dind:latest
 
-RUN sudo apt install npm \
+RUN sudo apt update -y \
+  && sudo apt install npm -y \
   && sudo npm install -g yarn \
-  && sudo apt update -y \
-  && sudo apt install yarn -y \
   && sudo rm -rf /var/lib/apt/lists/*
 
 ARG VERSION=v4.24.4
