@@ -11,3 +11,11 @@ ARG VERSION=v4.24.4
 ARG BINARY=yq_linux_amd64
 RUN sudo wget https://github.com/mikefarah/yq/releases/download/${VERSION}/${BINARY} -O /usr/bin/yq && \
   sudo chmod +x /usr/bin/yq
+
+RUN curl -sL https://deb.nodesource.com/setup_18.x -o /tmp/nodesource_setup.sh \
+  && sudo bash /tmp/nodesource_setup.sh \
+  && sudo apt install nodejs -y \
+  && sudo rm /tmp/nodesource_setup.sh
+
+RUN npx playwright install --with-deps
+RUN sudo yarn add cypress@5.6.0 --save-dev --unsafe-perm=true --allow-root
