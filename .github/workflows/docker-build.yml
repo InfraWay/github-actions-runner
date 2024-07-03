@@ -29,4 +29,8 @@ jobs:
           DOCKERNAME="infraway/${{ github.event.repository.name }}:${TAG}"
           docker build . -t ${DOCKERNAME} -f Dockerfile.tests
           docker push ${DOCKERNAME}
+          TAG="arc-runners-tests"
+          DOCKERNAME="infraway/${{ github.event.repository.name }}:${TAG}"
+          docker build . -t ${DOCKERNAME} -f Dockerfile.tests.new
+          docker push ${DOCKERNAME}
           docker logout
