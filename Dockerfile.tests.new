@@ -17,6 +17,3 @@ RUN curl -sL https://deb.nodesource.com/setup_18.x -o /tmp/nodesource_setup.sh \
   && sudo bash /tmp/nodesource_setup.sh \
   && sudo apt install nodejs -y \
   && sudo rm /tmp/nodesource_setup.sh
-
-RUN npx playwright install --with-deps
-RUN sudo yarn add cypress@5.6.0 --save-dev --unsafe-perm=true --allow-root
