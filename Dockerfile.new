@@ -1,7 +1,7 @@
 FROM ghcr.io/actions/actions-runner:latest
 
 RUN sudo apt update -y \
-  && sudo apt install curl wget npm -y \
+  && sudo apt install curl wget npm jq -y \
   && sudo npm install -g yarn \
   && sudo rm -rf /var/lib/apt/lists/*
 
