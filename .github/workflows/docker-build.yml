@@ -17,18 +17,6 @@ jobs:
           DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
         run: |
           echo ${DOCKER_PASSWORD} | docker login -u ${DOCKER_USERNAME} --password-stdin
-          # TAG="standard"
-          # DOCKERNAME="infraway/${{ github.event.repository.name }}:${TAG}"
-          # docker build . -t ${DOCKERNAME}
-          # docker push ${DOCKERNAME}
-          # TAG="dind"
-          # DOCKERNAME="infraway/${{ github.event.repository.name }}:${TAG}"
-          # docker build . -t ${DOCKERNAME} -f Dockerfile.dind
-          # docker push ${DOCKERNAME}
-          # TAG="tests"
-          # DOCKERNAME="infraway/${{ github.event.repository.name }}:${TAG}"
-          # docker build . -t ${DOCKERNAME} -f Dockerfile.tests
-          # docker push ${DOCKERNAME}
           TAG="arc-runners"
           DOCKERNAME="infraway/${{ github.event.repository.name }}:${TAG}"
           docker build . -t ${DOCKERNAME} -f Dockerfile.new
