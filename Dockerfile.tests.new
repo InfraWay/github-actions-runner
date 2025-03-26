@@ -1,4 +1,4 @@
-FROM ghcr.io/actions/actions-runner:2.323.0
+FROM ghcr.io/actions/actions-runner:latest
 
 RUN sudo apt update -y \
   && sudo apt install npm -y \
